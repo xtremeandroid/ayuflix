@@ -3,7 +3,7 @@ import { Container } from "./Home";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-const API_URL = `http://www.omdbapi.com/?apikey=${
+const API_URL = `https://www.omdbapi.com/?apikey=${
   import.meta.env.VITE_APP_API_KEY
 }`;
 
