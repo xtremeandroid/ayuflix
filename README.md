@@ -40,3 +40,7 @@ Start the development server:
 npm start
 ```
 ## Screenshots
+
+![chrome_nOOvDimQCk](https://github.com/xtremeandroid/ayuflix/assets/62198074/e62c79ed-51a4-4ad8-b77c-7e1caff669d5)
+![chrome_KlDe8dAO6E](https://github.com/xtremeandroid/ayuflix/assets/62198074/4cb48fcb-0aa3-4fc3-bda1-8651e369cb45)
+![chrome_LJJYQk8Az8](https://github.com/xtremeandroid/ayuflix/assets/62198074/b34236f4-8718-4dff-9a81-0c2462544cc9)
