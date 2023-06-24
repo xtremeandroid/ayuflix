@@ -5,17 +5,30 @@ import { useNavigate } from "react-router-dom";
 const MovieCard = ({ movie }) => {
   const NavigateTo = useNavigate();
   return (
-    <Wrap onClick={() => NavigateTo(`/movie/${movie.imdbID}`)}>
+    <Wrap
+      key={movie.id}
+      onClick={
+        movie.media_type === "tv"
+          ? () => NavigateTo(`/tv/${movie.id}`)
+          : () => NavigateTo(`/movie/${movie.id}`)
+      }
+    >
       <Poster
         src={
-          movie.Poster !== "N/A"
-            ? movie.Poster
+          movie.poster_path
+            ? `https://image.tmdb.org/t/p/original/${movie.poster_path}`
             : "https://via.placeholder.com/400"
         }
       />
       <Details>
-        <Title>{movie.Title}</Title>
-        <Year>{movie.Year}</Year>
+        <Title>{movie.name ? movie.name : movie.title}</Title>
+        <Year>
+          {movie.first_air_date
+            ? movie.first_air_date.slice(0, 4)
+            : movie.release_date
+            ? movie.release_date.slice(0, 4)
+            : ""}
+        </Year>
       </Details>
     </Wrap>
   );
@@ -42,7 +55,7 @@ const Details = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 16px;
+  font-size: 1.1em;
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 8px;
@@ -50,7 +63,7 @@ const Title = styled.div`
 `;
 const Year = styled.div`
   color: #a1a5b0;
-  font-size: 14px;
+  font-size: 1.1em;
   font-weight: 400;
 `;
 export default MovieCard;

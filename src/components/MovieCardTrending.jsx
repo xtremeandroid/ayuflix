@@ -22,6 +22,13 @@ const MovieCardTrending = ({ movie }) => {
       />
       <Details>
         <Title>{movie.name ? movie.name : movie.title}</Title>
+        <Year>
+          {movie.first_air_date
+            ? movie.first_air_date.slice(0, 4)
+            : movie.release_date
+            ? movie.release_date.slice(0, 4)
+            : ""}
+        </Year>
       </Details>
     </Wrap>
   );
@@ -53,6 +60,11 @@ const Title = styled.div`
   line-height: 1.2;
   margin-bottom: 8px;
   color: #a1a5b0;
+`;
+const Year = styled.div`
+  color: #a1a5b0;
+  font-size: 1.1em;
+  font-weight: 400;
 `;
 
 export default MovieCardTrending;

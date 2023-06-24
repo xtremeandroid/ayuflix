@@ -3,10 +3,6 @@ import { Container } from "./Home";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-// const API_URL = `https://www.omdbapi.com/?apikey=${
-//   import.meta.env.VITE_APP_API_KEY
-// }`;
-
 const API_URL = "https://api.themoviedb.org";
 
 const SeriesDetails = () => {
@@ -23,7 +19,6 @@ const SeriesDetails = () => {
         import.meta.env.VITE_APP_TMDB_API_KEY
       }`
     );
-    console.log(apiResponse.data);
     setMovieDetails(apiResponse.data);
   };
   return (
@@ -54,7 +49,7 @@ const SeriesDetails = () => {
 
           <DetailCard>
             <h3>
-              <span>Year of Release : </span>
+              <span>Release Date: </span>
               {movieDetails.first_air_date}
             </h3>
           </DetailCard>
@@ -98,6 +93,8 @@ const Container1 = styled(Container)`
   display: flex;
   position: relative;
   min-height: 100vh;
+  height: 100%;
+  width: 100%;
 
   &::before {
     content: "";
@@ -161,11 +158,14 @@ const Poster = styled.img`
 const Detail = styled.div`
   background-color: rgba(0, 0, 0, 0.8);
   margin-left: 50px;
+  min-height: 600px;
+  min-width: 40vw;
   @media only screen and (min-width: 480px) and (max-width: 768px) {
     margin-left: 0;
     margin-top: 30px;
     padding: 10%;
     max-width: 350px;
+    min-height: auto;
   }
 
   @media only screen and (max-width: 479px) {
@@ -173,6 +173,7 @@ const Detail = styled.div`
     margin-top: 30px;
     padding: 10px;
     max-width: 350px;
+    min-height: auto;
   }
 `;
 

@@ -57,6 +57,7 @@ export const Container = styled.div`
   min-height: calc(100vh - 250px);
   padding: 20px;
   overflow-x: hidden;
+  margin-top: 62px;
   span {
     color: red;
   }

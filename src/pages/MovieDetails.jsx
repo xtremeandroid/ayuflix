@@ -3,9 +3,6 @@ import { Container } from "./Home";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-// const API_URL = `https://www.omdbapi.com/?apikey=${
-//   import.meta.env.VITE_APP_API_KEY
-// }`;
 
 const API_URL = "https://api.themoviedb.org";
 
@@ -23,7 +20,6 @@ const MovieDetails = () => {
         import.meta.env.VITE_APP_TMDB_API_KEY
       }`
     );
-    console.log(apiResponse.data);
     setMovieDetails(apiResponse.data);
   };
   return (
@@ -54,7 +50,7 @@ const MovieDetails = () => {
 
           <DetailCard>
             <h3>
-              <span>Year of Release : </span>
+              <span>Release Date : </span>
               {movieDetails.release_date}
             </h3>
           </DetailCard>
@@ -80,12 +76,16 @@ const MovieDetails = () => {
               {movieDetails.overview}
             </h3>
           </DetailCard>
-          <DetailCard>
-            <h3>
-              <span>Watch Now : </span>
-              <a href={movieDetails.homepage}> {movieDetails.title} </a>
-            </h3>
-          </DetailCard>
+          {movieDetails.homepage ? (
+            <DetailCard>
+              <h3>
+                <span>Watch Now : </span>
+                <a href={movieDetails.homepage}> {movieDetails.title} </a>
+              </h3>
+            </DetailCard>
+          ) : (
+            <></>
+          )}
         </Detail>
       </Content>
     </Container1>
@@ -161,11 +161,14 @@ const Poster = styled.img`
 const Detail = styled.div`
   background-color: rgba(0, 0, 0, 0.8);
   margin-left: 50px;
+  min-height: 600px;
+  min-width: 40vw;
   @media only screen and (min-width: 480px) and (max-width: 768px) {
     margin-left: 0;
     margin-top: 30px;
     padding: 10%;
     max-width: 350px;
+    min-height: auto;
   }
 
   @media only screen and (max-width: 479px) {
@@ -173,6 +176,7 @@ const Detail = styled.div`
     margin-top: 30px;
     padding: 10px;
     max-width: 350px;
+    min-height: auto;
   }
 `;
 

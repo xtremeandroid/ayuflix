@@ -6,9 +6,7 @@ import { styled } from "styled-components";
 import MovieCard from "../components/MovieCard";
 import axios from "axios";
 
-const API_URL = `https://www.omdbapi.com/?apikey=${
-  import.meta.env.VITE_APP_API_KEY
-}`;
+const API_URL = "https://api.themoviedb.org";
 
 const SearchPage = () => {
   const [movies, setMovies] = useState([]);
@@ -18,9 +16,13 @@ const SearchPage = () => {
     getMovies(params.query);
   }, [params.query]);
 
-  const getMovies = async (title) => {
-    const apiResponse = await axios.get(`${API_URL}&s=${title}`);
-    setMovies(apiResponse.data.Search);
+  const getMovies = async () => {
+    const apiResponse = await axios.get(
+      `${API_URL}/3/search/multi?api_key=${
+        import.meta.env.VITE_APP_TMDB_API_KEY
+      }&language=en-US&query=${params.query}`
+    );
+    setMovies(apiResponse.data.results);
   };
 
   return (
@@ -32,7 +34,7 @@ const SearchPage = () => {
         {movies ? (
           <MovieWrapper>
             {movies.map((movie) => (
-              <MovieCard movie={movie} />
+              <MovieCard movie={movie} key={movie.id} />
             ))}
           </MovieWrapper>
         ) : (
