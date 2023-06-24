@@ -39,9 +39,9 @@ const Wrap = styled.div`
   background-color: #14141a;
   border-radius: 20px;
   overflow: hidden;
-  width: 430px;
+  max-width: 440px;
   height: auto;
-  margin: 20px;
+  margin: 10px;
   cursor: pointer;
 `;
 
