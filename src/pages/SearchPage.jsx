@@ -24,7 +24,7 @@ const SearchPage = () => {
   };
 
   return (
-    <Container>
+    <Container1>
       <Content>
         <Heading>Search Movies</Heading>
         <Search />
@@ -41,9 +41,15 @@ const SearchPage = () => {
           </MovieWrapper>
         )}
       </Content>
-    </Container>
+    </Container1>
   );
 };
+
+const Container1 = styled(Container)`
+  align-items: center;
+  justify-content: center;
+  display: flex;
+`;
 
 const Heading = styled.h2`
   color: red;

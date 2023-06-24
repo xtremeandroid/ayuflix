@@ -1,11 +1,12 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-body{
+html{
     background-color: black;
     color: #fff;
     font-family: 'Poppins', sans-serif;
     overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 *{

@@ -72,6 +72,7 @@ const MovieDetails = () => {
 const Container1 = styled(Container)`
   align-items: center;
   justify-content: left;
+  display: flex;
 
   @media only screen and (min-width: 480px) and (max-width: 768px) {
     flex-wrap: wrap;
