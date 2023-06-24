@@ -5,7 +5,14 @@ import { useNavigate } from "react-router-dom";
 const MovieCardTrending = ({ movie }) => {
   const NavigateTo = useNavigate();
   return (
-    <Wrap key={movie.id} onClick={() => NavigateTo(`/movie/${movie.imdbID}`)}>
+    <Wrap
+      key={movie.id}
+      onClick={
+        movie.media_type === "tv"
+          ? () => NavigateTo(`/tv/${movie.id}`)
+          : () => NavigateTo(`/movie/${movie.id}`)
+      }
+    >
       <Poster
         src={
           movie.backdrop_path

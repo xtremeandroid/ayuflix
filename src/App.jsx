@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Header from "./components/Header";
 import SearchPage from "./pages/SearchPage";
 import MovieDetails from "./pages/MovieDetails";
+import SeriesDetails from "./pages/SeriesDetails";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route path="/search/:query" element={<SearchPage />} />
         <Route path="/movie/:id" element={<MovieDetails />} />
+        <Route path="/tv/:id" element={<SeriesDetails />} />
       </Routes>
     </Router>
   );

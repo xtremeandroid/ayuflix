@@ -24,7 +24,6 @@ const Nav = styled.div`
   left: 0;
   right: 0;
   border-bottom: 1px solid gray;
-  z-index: 3;
 
   display: flex;
   align-items: center;

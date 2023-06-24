@@ -9,7 +9,7 @@ import axios from "axios";
 
 const API_URL = "https://api.themoviedb.org";
 
-const MovieDetails = () => {
+const SeriesDetails = () => {
   const [movieDetails, setMovieDetails] = useState([]);
   const params = useParams();
 
@@ -19,7 +19,7 @@ const MovieDetails = () => {
 
   const getDetails = async () => {
     const apiResponse = await axios.get(
-      `${API_URL}/3/movie/${params.id}?api_key=${
+      `${API_URL}/3/tv/${params.id}?api_key=${
         import.meta.env.VITE_APP_TMDB_API_KEY
       }`
     );
@@ -48,14 +48,14 @@ const MovieDetails = () => {
           <DetailCard>
             <h3>
               <span>Title : </span>
-              {movieDetails.title}
+              {movieDetails.original_name}
             </h3>
           </DetailCard>
 
           <DetailCard>
             <h3>
               <span>Year of Release : </span>
-              {movieDetails.release_date}
+              {movieDetails.first_air_date}
             </h3>
           </DetailCard>
 
@@ -83,7 +83,7 @@ const MovieDetails = () => {
           <DetailCard>
             <h3>
               <span>Watch Now : </span>
-              <a href={movieDetails.homepage}> {movieDetails.title} </a>
+              <a href={movieDetails.homepage}> {movieDetails.original_name}</a>
             </h3>
           </DetailCard>
         </Detail>
@@ -216,4 +216,4 @@ const DetailCard = styled.div`
   }
 `;
 
-export default MovieDetails;
+export default SeriesDetails;
