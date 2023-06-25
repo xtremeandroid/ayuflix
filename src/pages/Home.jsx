@@ -20,7 +20,7 @@ const Home = () => {
         import.meta.env.VITE_APP_TMDB_API_KEY
       }`
     );
-    setMovies(apiResponse.data.results.slice(0, 8));
+    setMovies(apiResponse.data.results);
   };
   return (
     <Container>
