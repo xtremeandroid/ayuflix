@@ -6,7 +6,6 @@ const MovieCardTrending = ({ movie }) => {
   const NavigateTo = useNavigate();
   return (
     <Wrap
-      key={movie.id}
       onClick={
         movie.media_type === "tv"
           ? () => NavigateTo(`/tv/${movie.id}`)
@@ -39,10 +38,18 @@ const Wrap = styled.div`
   background-color: #14141a;
   border-radius: 20px;
   overflow: hidden;
-  max-width: 440px;
+  max-width: 280px;
   height: auto;
   margin: 10px;
   cursor: pointer;
+
+  @media only screen and (min-width: 480px) and (max-width: 768px) {
+    max-width: 100%;
+  }
+
+  @media only screen and (max-width: 479px) {
+    max-width: 100%;
+  }
 `;
 
 const Poster = styled.img`

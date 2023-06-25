@@ -70,8 +70,8 @@ const MovieWrapper = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
+  justify-content: space-evenly;
+  align-items: flex-start;
 
   h2 {
     margin-top: 50px;

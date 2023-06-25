@@ -6,7 +6,6 @@ const MovieCard = ({ movie }) => {
   const NavigateTo = useNavigate();
   return (
     <Wrap
-      key={movie.id}
       onClick={
         movie.media_type === "tv"
           ? () => NavigateTo(`/tv/${movie.id}`)
@@ -39,15 +38,35 @@ const Wrap = styled.div`
   background-color: #14141a;
   border-radius: 20px;
   overflow: hidden;
-  width: 221px;
   height: 424px;
-  margin: 20px;
+  margin: 25px;
   cursor: pointer;
+  width: 221px;
+
+  @media only screen and (min-width: 480px) and (max-width: 768px) {
+    width: 100%;
+    height: auto;
+  }
+
+  @media only screen and (max-width: 479px) {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 const Poster = styled.img`
-  width: 222px !important;
+  width: 222px;
   height: 298px;
+
+  @media only screen and (min-width: 480px) and (max-width: 768px) {
+    width: 100%;
+    height: auto;
+  }
+
+  @media only screen and (max-width: 479px) {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 const Details = styled.div`
