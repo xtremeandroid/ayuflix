@@ -3,7 +3,7 @@ import { Container } from "./Home";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-const API_URL = "https://api.themoviedb.org";
+import { API_URL } from "../App";
 
 const SeriesDetails = () => {
   const [movieDetails, setMovieDetails] = useState([]);

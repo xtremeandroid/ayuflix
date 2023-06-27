@@ -37,9 +37,9 @@ const Wrap = styled.div`
   color: black;
   background-color: #14141a;
   border-radius: 20px;
-  overflow: hidden;
-  max-width: 280px;
-  height: auto;
+  /* overflow: hidden; */
+  max-width: 290px;
+  min-height: 268px;
   margin: 10px;
   cursor: pointer;
 
@@ -54,11 +54,10 @@ const Wrap = styled.div`
 
 const Poster = styled.img`
   width: 100%;
-  height: auto;
 `;
 
 const Details = styled.div`
-  padding: 20px;
+  padding: 10px;
 `;
 
 const Title = styled.div`

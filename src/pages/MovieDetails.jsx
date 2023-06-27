@@ -3,15 +3,16 @@ import { Container } from "./Home";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-
-const API_URL = "https://api.themoviedb.org";
+import { API_URL } from "../App";
 
 const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState([]);
+  const [castDetails, setCastDetails] = useState([]);
   const params = useParams();
 
   useEffect(() => {
     getDetails();
+    getCastDetails();
   }, []);
 
   const getDetails = async () => {
@@ -21,7 +22,19 @@ const MovieDetails = () => {
       }`
     );
     setMovieDetails(apiResponse.data);
+    console.log(apiResponse);
   };
+
+  const getCastDetails = async () => {
+    const apiResponse = await axios.get(
+      `${API_URL}/3/movie/${params.id}/credits?api_key=${
+        import.meta.env.VITE_APP_TMDB_API_KEY
+      }`
+    );
+    setCastDetails(apiResponse.data.cast);
+    console.log(apiResponse.data.cast);
+  };
+
   return (
     <Container1 background={movieDetails.backdrop_path}>
       <Content>

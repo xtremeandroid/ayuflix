@@ -3,10 +3,9 @@ import { useParams } from "react-router-dom";
 import { Container } from "./Home";
 import Search from "../components/Search";
 import { styled } from "styled-components";
-import MovieCard from "../components/MovieCard";
+import MovieCard from "../components/MovieCardVertical";
 import axios from "axios";
-
-const API_URL = "https://api.themoviedb.org";
+import { API_URL } from "../App";
 
 const SearchPage = () => {
   const [movies, setMovies] = useState([]);

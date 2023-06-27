@@ -3,9 +3,8 @@ import { styled } from "styled-components";
 import Search from "../components/Search";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import MovieCardTrending from "../components/MovieCardTrending";
-
-const API_URL = "https://api.themoviedb.org";
+import MovieCardTrending from "../components/MovieCardHorizontal";
+import { API_URL } from "../App";
 
 const Home = () => {
   const [movies, setMovies] = useState([]);

@@ -7,6 +7,9 @@ import MovieDetails from "./pages/MovieDetails";
 import SeriesDetails from "./pages/SeriesDetails";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import Explore from "./pages/Explore";
+
+export const API_URL = "https://api.themoviedb.org";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -28,6 +31,7 @@ function App() {
         <Route path="/search/:query" element={<SearchPage />} />
         <Route path="/movie/:id" element={<MovieDetails />} />
         <Route path="/tv/:id" element={<SeriesDetails />} />
+        <Route path="/explore" element={<Explore />} />
       </Routes>
     </Router>
   );
