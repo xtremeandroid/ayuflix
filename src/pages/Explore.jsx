@@ -5,16 +5,17 @@ import MovieCardTrending from "../components/MovieCardHorizontal";
 import axios from "axios";
 import { API_URL } from "../App";
 import Pagination from "../components/Pagination";
+import SkeletonCardHorizontal from "../components/SkeletonCardHorizontal";
 
 const Explore = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
   const [selectedOption, setSelectedOption] = useState("movie");
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
 
   useEffect(() => {
-    setIsLoading(true);
+    setLoading(true);
     getTrending();
   }, [selectedOption, page]);
 
@@ -32,8 +33,10 @@ const Explore = () => {
       }&page=${page}`
     );
     setTrendingMovies(apiResponse.data.results);
-    setIsLoading(false);
     setLastPage(apiResponse.data.total_pages);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
   };
 
   const handleOptionChange = (event) => {
@@ -75,8 +78,12 @@ const Explore = () => {
           </OptionLabel>
         </OptionWrapper>
       </Heading>
-      {isLoading ? (
-        <LoadingMessage>Loading...</LoadingMessage>
+      {loading ? (
+        <MovieWrapper>
+          {new Array(24).fill(0).map((element, index) => (
+            <SkeletonCardHorizontal key={index} />
+          ))}
+        </MovieWrapper>
       ) : (
         <>
           <MovieWrapper>

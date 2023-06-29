@@ -10,8 +10,10 @@ const MovieDetails = () => {
   const [castDetails, setCastDetails] = useState([]);
   const params = useParams();
   const [directorName, setDirectorName] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     getDetails();
     getCastDetails();
   }, []);
@@ -23,6 +25,9 @@ const MovieDetails = () => {
       }`
     );
     setMovieDetails(apiResponse.data);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
   };
 
   const getCastDetails = async () => {
@@ -43,13 +48,17 @@ const MovieDetails = () => {
     <Container1 background={movieDetails.backdrop_path}>
       <DetailsWrapper>
         <Content>
-          <Poster
-            src={
-              movieDetails.poster_path
-                ? `https://image.tmdb.org/t/p/original/${movieDetails.poster_path}`
-                : "https://via.placeholder.com/400"
-            }
-          />
+          {loading ? (
+            <PosterSkeleton />
+          ) : (
+            <Poster
+              src={
+                movieDetails.poster_path
+                  ? `https://image.tmdb.org/t/p/original/${movieDetails.poster_path}`
+                  : "https://via.placeholder.com/400"
+              }
+            />
+          )}
         </Content>
         <Content>
           <Detail>
@@ -116,20 +125,24 @@ const MovieDetails = () => {
       <CastDetails>
         <h3>Cast Details</h3>
         <Grid>
-          {castDetails.map((cast) => (
-            <CastCard key={cast.id}>
-              <CastImage
-                src={
-                  cast.profile_path
-                    ? `https://image.tmdb.org/t/p/original/${cast.profile_path}`
-                    : "https://via.placeholder.com/150"
-                }
-                alt={cast.name}
-              />
-              <CastName>{cast.character}</CastName>
-              <CastName>({cast.name})</CastName>
-            </CastCard>
-          ))}
+          {loading
+            ? new Array(10)
+                .fill(0)
+                .map((element, index) => <CastImageSkeleton key={index} />)
+            : castDetails.map((cast) => (
+                <CastCard key={cast.id}>
+                  <CastImage
+                    src={
+                      cast.profile_path
+                        ? `https://image.tmdb.org/t/p/original/${cast.profile_path}`
+                        : "https://via.placeholder.com/150"
+                    }
+                    alt={cast.name}
+                  />
+                  <CastName>{cast.character}</CastName>
+                  <CastName>({cast.name})</CastName>
+                </CastCard>
+              ))}
         </Grid>
       </CastDetails>
     </Container1>
@@ -322,6 +335,37 @@ const CastImage = styled.img`
 
 const CastName = styled.h4`
   margin-top: 10px;
+`;
+
+const PosterSkeleton = styled.div`
+  background-color: #2e2e2e;
+  min-width: 400px;
+  min-height: 600px;
+
+  @media only screen and (min-width: 480px) and (max-width: 768px) {
+    min-width: 100%;
+    min-height: auto;
+  }
+
+  @media only screen and (max-width: 479px) {
+    min-width: 100%;
+    min-height: auto;
+  }
+`;
+
+const CastImageSkeleton = styled.div`
+  background-color: #2e2e2e;
+  min-height: 295px;
+  min-width: 165px;
+  @media only screen and (min-width: 480px) and (max-width: 768px) {
+    width: 100%;
+    height: auto;
+  }
+
+  @media only screen and (max-width: 479px) {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 export default MovieDetails;

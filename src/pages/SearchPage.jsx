@@ -6,12 +6,15 @@ import { styled } from "styled-components";
 import MovieCard from "../components/MovieCardVertical";
 import axios from "axios";
 import { API_URL } from "../App";
+import SkeletonCardVertical from "../components/SkeletonCardVertical";
 
 const SearchPage = () => {
   const [movies, setMovies] = useState([]);
   const params = useParams();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     getMovies(params.query);
   }, [params.query]);
 
@@ -22,6 +25,9 @@ const SearchPage = () => {
       }&language=en-US&query=${params.query}`
     );
     setMovies(apiResponse.data.results);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
   };
 
   return (
@@ -30,12 +36,20 @@ const SearchPage = () => {
         <Heading>Search Movies</Heading>
         <Search />
 
-        {movies ? (
-          <MovieWrapper>
-            {movies.map((movie) => (
-              <MovieCard movie={movie} key={movie.id} />
-            ))}
-          </MovieWrapper>
+        {movies && movies.length > 0 ? (
+          loading ? (
+            <MovieWrapper>
+              {new Array(12).fill(0).map((element, index) => (
+                <SkeletonCardVertical key={index} />
+              ))}
+            </MovieWrapper>
+          ) : (
+            <MovieWrapper>
+              {movies.map((movie) => (
+                <MovieCard movie={movie} key={movie.id} />
+              ))}
+            </MovieWrapper>
+          )
         ) : (
           <MovieWrapper>
             <h2>No Movies Found</h2>

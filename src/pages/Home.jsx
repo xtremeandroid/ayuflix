@@ -5,12 +5,17 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import MovieCardTrending from "../components/MovieCardHorizontal";
 import { API_URL } from "../App";
+import SkeletonCardHorizontal from "../components/SkeletonCardHorizontal";
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getTrending();
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
   }, []);
 
   const getTrending = async () => {
@@ -42,11 +47,20 @@ const Home = () => {
       </ContentWrapper>
       <Content3>
         <h2>Trending Shows and Movies</h2>
-        <MovieWrapper>
-          {movies.map((movie) => (
-            <MovieCardTrending movie={movie} key={movie.id} />
-          ))}
-        </MovieWrapper>
+
+        {loading ? (
+          <MovieWrapper>
+            {new Array(12).fill(0).map((element, index) => (
+              <SkeletonCardHorizontal key={index} />
+            ))}
+          </MovieWrapper>
+        ) : (
+          <MovieWrapper>
+            {movies.map((movie) => (
+              <MovieCardTrending movie={movie} key={movie.id} />
+            ))}
+          </MovieWrapper>
+        )}
       </Content3>
     </Container>
   );

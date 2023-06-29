@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Container } from "./Home";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -10,8 +9,10 @@ const SeriesDetails = () => {
   const [castDetails, setCastDetails] = useState([]);
   const params = useParams();
   const [directorName, setDirectorName] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     getDetails();
     getCastDetails();
   }, []);
@@ -23,6 +24,9 @@ const SeriesDetails = () => {
       }`
     );
     setSeriesDetails(apiResponse.data);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
   };
 
   const getCastDetails = async () => {
@@ -43,13 +47,17 @@ const SeriesDetails = () => {
     <Container1 background={seriesDetails.backdrop_path}>
       <DetailsWrapper>
         <Content>
-          <Poster
-            src={
-              seriesDetails.poster_path
-                ? `https://image.tmdb.org/t/p/original/${seriesDetails.poster_path}`
-                : "https://via.placeholder.com/400"
-            }
-          />
+          {loading ? (
+            <PosterSkeleton />
+          ) : (
+            <Poster
+              src={
+                seriesDetails.poster_path
+                  ? `https://image.tmdb.org/t/p/original/${seriesDetails.poster_path}`
+                  : "https://via.placeholder.com/400"
+              }
+            />
+          )}
         </Content>
         <Content>
           <Detail>
@@ -115,7 +123,26 @@ const SeriesDetails = () => {
       <CastDetails>
         <h3>Cast Details</h3>
         <Grid>
-          {castDetails.map((cast) => (
+          {loading
+            ? new Array(10)
+                .fill(0)
+                .map((element, index) => <CastImageSkeleton key={index} />)
+            : castDetails.map((cast) => (
+                <CastCard key={cast.id}>
+                  <CastImage
+                    src={
+                      cast.profile_path
+                        ? `https://image.tmdb.org/t/p/original/${cast.profile_path}`
+                        : "https://via.placeholder.com/150"
+                    }
+                    alt={cast.name}
+                  />
+                  <CastName>{cast.character}</CastName>
+                  <CastName>({cast.name})</CastName>
+                </CastCard>
+              ))}
+
+          {/* {castDetails.map((cast) => (
             <CastCard key={cast.id}>
               <CastImage
                 src={
@@ -128,7 +155,7 @@ const SeriesDetails = () => {
               <CastName>{cast.character}</CastName>
               <CastName>({cast.name})</CastName>
             </CastCard>
-          ))}
+          ))} */}
         </Grid>
       </CastDetails>
     </Container1>
@@ -153,7 +180,13 @@ const DetailsWrapper = styled.div`
     flex-direction: column;
   }
 `;
-const Container1 = styled(Container)`
+const Container1 = styled.div`
+  padding: 20px;
+  overflow-x: hidden;
+  margin-top: 62px;
+  span {
+    color: red;
+  }
   align-items: center;
   justify-content: left;
   display: flex;
@@ -321,6 +354,37 @@ const CastImage = styled.img`
 
 const CastName = styled.h4`
   margin-top: 10px;
+`;
+
+const PosterSkeleton = styled.div`
+  background-color: #2e2e2e;
+  min-width: 400px;
+  min-height: 600px;
+
+  @media only screen and (min-width: 480px) and (max-width: 768px) {
+    min-width: 100%;
+    min-height: auto;
+  }
+
+  @media only screen and (max-width: 479px) {
+    min-width: 100%;
+    min-height: auto;
+  }
+`;
+
+const CastImageSkeleton = styled.div`
+  background-color: #2e2e2e;
+  min-height: 295px;
+  min-width: 165px;
+  @media only screen and (min-width: 480px) and (max-width: 768px) {
+    width: 100%;
+    height: auto;
+  }
+
+  @media only screen and (max-width: 479px) {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 export default SeriesDetails;

@@ -37,7 +37,7 @@ const Wrap = styled.div`
   color: black;
   background-color: #14141a;
   border-radius: 20px;
-  max-width: 290px;
+  max-width: 285px;
   min-height: 268px;
   margin: 10px;
   cursor: pointer;
