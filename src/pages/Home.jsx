@@ -12,10 +12,8 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     getTrending();
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
   }, []);
 
   const getTrending = async () => {
@@ -25,6 +23,9 @@ const Home = () => {
       }`
     );
     setMovies(apiResponse.data.results);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
   };
   return (
     <Container>
