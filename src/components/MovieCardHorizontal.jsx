@@ -37,7 +37,6 @@ const Wrap = styled.div`
   color: black;
   background-color: #14141a;
   border-radius: 20px;
-  /* overflow: hidden; */
   max-width: 290px;
   min-height: 268px;
   margin: 10px;
